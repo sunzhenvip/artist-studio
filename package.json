@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "htest": "npx hardhat test",
-    "deploy": "npx hardhat run ./scripts/deploy.ts --network localhost",
+    "deploy": "npx hardhat run ./scripts/deploy.js --network localhost",
     "compile": "npx hardhat compile"
   },
   "eslintConfig": {
