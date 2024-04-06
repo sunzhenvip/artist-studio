@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { ethers } from "ethers";
+import Lock from "./artifacts/contracts/Lock.sol/Lock.json";
+
 
 function App() {
   const connect = async () => {
@@ -26,9 +28,38 @@ function App() {
     const address = await signer.getAddress();
     console.log("账号地址", address);
   }
+  const readMessage = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    await provider.send("eth_requestAccounts", []);
+    // 属于一个拨号资源
+    const lock = new ethers.Contract("0xa513E6E4b8f2a923D98304ec87F64353C4D5C853", Lock.abi, provider);
+    const message = await lock.message();
+    console.log(message);
+  }
+  const setMessage = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+    await provider.send("eth_requestAccounts", []);
+
+    const signer = provider.getSigner()
+
+    let lock = new ethers.Contract("0xa513E6E4b8f2a923D98304ec87F64353C4D5C853", Lock.abi, signer);
+
+    // 拿到了一个交易结构
+    let transaction = await lock.connect(signer).setMessage("world hello!");
+    let tx = await transaction.wait(1);// 才真正发起了操作
+    debugger
+    let event = tx.events[0];
+    let value = event.args[0];
+
+    let message = value.toString();
+    console.log(message);
+  }
   return (
     <div className="App">
       <button onClick={connect}> connect wallet </button>
+      <button onClick={readMessage}> readMessage </button>
+      <button onClick={setMessage}>setMessage</button>
     </div>
   );
 }
