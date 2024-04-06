@@ -19,7 +19,12 @@ contract Lock {
         unlockTime = _unlockTime;
         owner = payable(msg.sender);
     }
-
+    string public message = "hello world";
+    event SetMessage(string _msg);
+    function setMessage(string memory _msg) public {
+        message = _msg;
+        emit SetMessage(_msg);
+    }
     function withdraw() public {
         // Uncomment this line, and the import of "hardhat/console.sol", to print a log in your terminal
         // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
