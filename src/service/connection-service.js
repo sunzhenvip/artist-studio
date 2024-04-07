@@ -34,5 +34,4 @@ export const connect = async () => {
 
     });
     await trying();
-    // 睡觉 xxx
 }
