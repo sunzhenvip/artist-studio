@@ -32,6 +32,7 @@ function App() {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     await provider.send("eth_requestAccounts", []);
     // 属于一个拨号资源
+    // 部署的合约地址
     const lock = new ethers.Contract("0xa513E6E4b8f2a923D98304ec87F64353C4D5C853", Lock.abi, provider);
     const message = await lock.message();
     console.log(message);
@@ -42,7 +43,7 @@ function App() {
     await provider.send("eth_requestAccounts", []);
 
     const signer = provider.getSigner()
-
+    // 部署的合约地址
     let lock = new ethers.Contract("0xa513E6E4b8f2a923D98304ec87F64353C4D5C853", Lock.abi, signer);
 
     // 拿到了一个交易结构
