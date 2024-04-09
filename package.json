@@ -34,7 +34,7 @@
     "compile": "npx hardhat compile",
     "htest": "npx hardhat test",
     "deploy": "npx hardhat run ./scripts/deploy.js --network localhost",
-    "deploy_anft": "npx hardhat run ./scripts/ArtistNFT.js --network localhost"
+    "deploy_anft": "npx hardhat run ./scripts/ArtistNFT.ts --network localhost"
   },
   "eslintConfig": {
     "extends": [
