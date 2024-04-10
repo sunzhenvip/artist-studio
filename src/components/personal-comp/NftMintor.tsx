@@ -34,6 +34,7 @@ function NftMintor() {
                 messageBox("danger", "", error.message)
         }
     }
+    // 铸币的函数调用
     const mint = async () => {
         try {
             debugger
@@ -45,7 +46,7 @@ function NftMintor() {
 
             if (success && tokenId) {
                 messageBox("success", "", tokenId?.toString())
-                navigate("/personal/collectible-browse")
+                navigate("/personal/collectible-browse") // 导航到浏览器的nft的浏览页上
                 // router.push("/mynft")
             } else {
                 messageBox("danger", "", "mint failed")
