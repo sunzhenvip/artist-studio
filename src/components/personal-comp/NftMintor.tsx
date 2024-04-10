@@ -8,6 +8,7 @@ import { NftMeta } from "../../service/types";
 import { useNavigate } from "react-router-dom"
 import { messageBox } from "../../service/message-service";
 import styles from './NftMintor.module.css'
+import { addToIpfs } from '../../service/ipfs-service'
 const props = {
     name: 'file',
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -24,7 +25,8 @@ function NftMintor() {
         try {
 
 
-            const imageuri = await storeNftImage(file);//addToIpfs(file)
+            // const imageuri = await storeNftImage(file);//addToIpfs(file)
+            const imageuri = await addToIpfs(file);//addToIpfs(file)
             messageBox("success", "", imageuri)
             setUri(imageuri);
         } catch (error) {
