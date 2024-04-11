@@ -40,13 +40,15 @@ function NftMintor() {
             debugger
             const data: NftMeta = { ...meta, imageUri: uri,type:"image" }
             const json = JSON.stringify(data);
-            const metauri = await storeMeta(json); //addToIpfs(json)
+            // const metauri = await storeMeta(json); //addToIpfs(json)
+            const metauri = await addToIpfs(json); //
             messageBox("success", "", metauri)
+            // 开始铸币
             const { success, tokenId } = await mintNFT(metauri);
 
             if (success && tokenId) {
                 messageBox("success", "", tokenId?.toString())
-                navigate("/personal/collectible-browse") // 导航到浏览器的nft的浏览页上
+                navigate("/personal/collectible-browse") // 直接导航到浏览器的nft的浏览页上
                 // router.push("/mynft")
             } else {
                 messageBox("danger", "", "mint failed")
