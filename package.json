@@ -33,6 +33,8 @@
     "eject": "react-scripts eject",
     "compile": "npx hardhat compile",
     "htest": "npx hardhat test",
+    "htest_nft":"npx hardhat test --network localhost ./test/ArtistNFT.ts",
+    "htest_lock":"npx hardhat test --network localhost ./test/Lock.js",
     "deploy": "npx hardhat run ./scripts/deploy.js --network localhost",
     "deploy_anft": "npx hardhat run ./scripts/ArtistNFT.ts --network localhost"
   },
