@@ -14,6 +14,7 @@ export const toArweave = async (entity, tags) => {
     })
     tx.addTag("Content-Type", "text/json");
     // 背后调用钱包 调用那个钱包 看背后初始化的是插件钱包还是web钱包
+    // xxx
     await arweave.transactions.sign(tx);
     const response = await arweave.transactions.post(tx);
 
