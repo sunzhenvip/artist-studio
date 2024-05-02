@@ -35,7 +35,7 @@ export const connect = async () => {
     // 链接的网络是否是我们应该当中支持的网络
     if (success)
         return;
-    // 如果失败 请求钱包 配置当前应用所需要的网络配置
+    // 如果失败 请求钱包 配置当前应用所需要的网络配置 如果走到这个分支 浏览器中的钱包会弹出 进行区块链网络的配置
     const conf = configuration()
     await window.ethereum.request({
         method: "wallet_addEthereumChain",
