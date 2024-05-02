@@ -5,6 +5,7 @@ import Lock from "./artifacts/contracts/Lock.sol/Lock.json";
 
 
 function App() {
+  const contractAddress = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
   const connect = async () => {
     /**
      * 新版本  "ethers": "^6.11.1" 配套  下面两个版本
@@ -21,7 +22,19 @@ function App() {
     // window.ethereum 是由一个浏览器metamask钱包插件注入给浏览器window对象中添加一个ethereum属性的
     const provider = new ethers.providers.Web3Provider(window.ethereum); // 新版本代码    "ethers": "^6.11.1",
     // 向钱包请求授权
-    await provider.send("eth_requestAccounts", []);
+    try {
+      const check_tokens = await provider.send("eth_requestAccounts", []); // 返回一个数组获取的是勾选的那几个账号
+      console.log("选中的token", check_tokens);
+    } catch (error) {
+      alert(`用户拒绝了钱包请求 message ${error.message}`);
+      return
+    }
+
+    const accounts = await provider.listAccounts();
+    console.log("accounts", accounts)
+    // const selectedAccount = accounts[0]; // 默认获取第一个账户
+
+
     // 获取钱包的账户信息
     const signer = provider.getSigner();
 
@@ -32,8 +45,8 @@ function App() {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     await provider.send("eth_requestAccounts", []);
     // 属于一个拨号资源
-    // 部署的合约地址
-    const lock = new ethers.Contract("0xa513E6E4b8f2a923D98304ec87F64353C4D5C853", Lock.abi, provider);
+    // 部署的合约地址 需要ABI信息 读函数 不需要 signer 签名信息
+    const lock = new ethers.Contract(contractAddress, Lock.abi, provider);
     const message = await lock.message();
     console.log(message);
   }
@@ -44,10 +57,10 @@ function App() {
 
     const signer = provider.getSigner()
     // 部署的合约地址
-    let lock = new ethers.Contract("0xa513E6E4b8f2a923D98304ec87F64353C4D5C853", Lock.abi, signer);
+    let lock = new ethers.Contract(contractAddress, Lock.abi, signer);
 
     // 拿到了一个交易结构
-    let transaction = await lock.connect(signer).setMessage("world hello!");
+    let transaction = await lock.connect(signer).setMessage("world hello" + Math.random());
     let tx = await transaction.wait(1);// 才真正发起了操作
     debugger
     let event = tx.events[0];
