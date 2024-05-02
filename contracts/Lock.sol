@@ -11,6 +11,7 @@ contract Lock {
     event Withdrawal(uint amount, uint when);
 
     constructor(uint _unlockTime) payable {
+        // 构造方法是payable修饰可以进行收款
         require(
             block.timestamp < _unlockTime,
             "Unlock time should be in the future"
