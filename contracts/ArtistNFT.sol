@@ -13,7 +13,12 @@ contract ArtistNFT is ERC721URIStorage, ERC721Enumerable {
     constructor() ERC721("ArtistNFT", "AN") {
        
     }
-
+    /**
+     * @dev Mints a token to an artist.
+     * @param artist 某个艺术家地址
+     * @param _tokenURI 某个艺术家的tokenURI
+     * @return The 返回新创建的token的id
+     */
     function mint(address artist, string memory _tokenURI)
         public
         returns (uint256)
