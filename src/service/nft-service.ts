@@ -23,11 +23,10 @@ export const owned = async (): Promise<{ success: boolean, data: Nft[] }> => {
 
     const count = await nft.balanceOf(address) // 拿到当前账号所拥有的nft数量
     const amount = count.toNumber();
-
+    debugger
     // 循环获取所有的nft
     const rst = await Promise.all(
         Array.from({ length: amount }, async (v, i) => {
-            debugger
             const tokenId = await nft.tokenOfOwnerByIndex(address, i)
             const tokenUri = await nft.tokenURI(tokenId)
             const meta = await axios.get(tokenUri)
@@ -35,6 +34,7 @@ export const owned = async (): Promise<{ success: boolean, data: Nft[] }> => {
 
         })
     )
+    debugger
     return { success: true, data: rst }
 
 }
