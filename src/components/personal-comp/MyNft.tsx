@@ -12,8 +12,8 @@ function MyNft() {
   }, []);
 
   const loadNfts = async () => {
-    // const ns = await ownedTypedNFT("image"); 暂时注释掉
-    const ns = await owned();
+    const ns = await ownedTypedNFT("image"); // 暂时注释掉
+    // const ns = await owned();
     if (ns.success)
       setNfts(ns.data)
     console.log("mounted!")

@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { storeArticle, storeMeta } from '../../../service/arweave-service';
 import { mintNFT } from '../../../service/nft-service';
 import { messageBox } from '../../../service/message-service';
+import { addToIpfs } from '../../../service/ipfs-service'
 
 const { Header, Content, Footer } = Layout;
 
@@ -73,11 +74,14 @@ const Example = () => {
 
   }
   const mintArticle = async () => {
-    let uri = await storeArticle(content);//addToIpfs(content);
+    debugger
+    let uri = await addToIpfs(content); // 文章的内容存储到ipfs中返回一个唯一的url地址
+    // let uri = await storeArticle(content);//addToIpfs(content);
     messageBox("success", "", uri)
     let meta = { name: title, description: title, type: "article", uri }
     let entity = JSON.stringify(meta)
-    let tokenURI = await storeMeta(entity);//addToIpfs(entity);
+    // let tokenURI = await storeMeta(entity);//addToIpfs(entity);
+    let tokenURI = await addToIpfs(entity);
     messageBox("success", "", tokenURI)
     let {success, tokenId} = await mintNFT(tokenURI)
     if (success) {

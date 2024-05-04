@@ -24,7 +24,7 @@ function NftMintor() {
     const store = async (file: any) => {
         try {
 
-
+            // 获取上传文件的信息存储到ipfs服务当中 返回一个唯一的hash值
             // const imageuri = await storeNftImage(file);//addToIpfs(file)
             const imageuri = await addToIpfs(file);//addToIpfs(file)
             messageBox("success", "", imageuri)
