@@ -6,6 +6,13 @@ import "./openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "./openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "./openzeppelin/contracts/utils/Counters.sol";
 
+
+// 该方式用于 https://remix.ethereum.org/ 网站在线测试引用库，请勿用于实际部署
+// import "https://mirror.ghproxy.com/https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/v4.8.2/contracts/token/ERC20/extensions/draft-IERC20Permit.sol";
+// import "https://mirror.ghproxy.com/https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/v4.8.2/contracts/token/ERC20/IERC20.sol";
+// import "https://mirror.ghproxy.com/https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/v4.8.2/contracts/interfaces/IERC1820Registry.sol";
+
+
 contract ArtistNFT is ERC721URIStorage, ERC721Enumerable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
